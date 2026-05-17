@@ -22,13 +22,12 @@ No human moderator. No platform fee. No trusted intermediary.
 ## Repository structure
 
 ```
-freelanceguard/
-├── contracts/
-│   └── freelance_guard.py   ← The Intelligent Contract (deploy this)
-├── assets/
-│   └── architecture.svg     ← System architecture diagram
-├── docs/
-│   └── TUTORIAL.md          ← Full step-by-step tutorial
+GenLayerfreelanceguard/
+├── index.html            ← Full educational site (deploy to Vercel/Netlify)
+├── freelance_guard.py    ← The Intelligent Contract (paste into GenLayer Studio)
+├── Architecture.svg      ← System architecture diagram
+├── TUTORIAL.md           ← Full step-by-step tutorial
+├── vercel.json           ← Vercel deployment config
 └── README.md
 ```
 
@@ -36,7 +35,7 @@ freelanceguard/
 
 ## Architecture
 
-![FreelanceGuard Architecture](assets/architecture.svg)
+![FreelanceGuard Architecture](Architecture.svg)
 
 | Layer | Component | GenLayer API |
 |---|---|---|
@@ -54,14 +53,14 @@ freelanceguard/
 
 1. Go to **[studio.genlayer.com](https://studio.genlayer.com)** — no install needed
 2. Create a new file: `freelance_guard.py`
-3. Paste the contract from `contracts/freelance_guard.py`
-4. Click **Deploy** — no constructor args
+3. Paste the full contract from `freelance_guard.py` in this repo
+4. Click **Deploy** — no constructor args needed
 5. Call `post_job()` and send GEN to create a job
 6. Call `submit_work()` with a public URL
 7. Call `evaluate_submission()` and watch Optimistic Democracy run
 8. Call `get_job()` to read the AI verdict and check fund release
 
-See `docs/TUTORIAL.md` for the full annotated walkthrough.
+See `TUTORIAL.md` for the full annotated walkthrough.
 
 ---
 
@@ -72,24 +71,26 @@ See `docs/TUTORIAL.md` for the full annotated walkthrough.
 | `@gl.public.write.payable` | Method can receive GEN tokens | `post_job()` |
 | `gl.message.value` | Amount of GEN sent with transaction | `post_job()` |
 | `gl.message.sender_account` | Verified caller wallet address | `submit_work()` |
-| `gl.nondet.web.render()` | Fetch live URL — no oracle | `evaluate_submission()` |
-| `gl.nondet.exec_prompt()` | Call LLM inside consensus | `evaluate_submission()` |
-| `gl.vm.run_nondet_unsafe()` | Custom Optimistic Democracy logic | `evaluate_submission()` |
-| `emit_transfer()` | Send GEN to any address | `evaluate_submission()` |
-| `TreeMap[K,V]` | Persistent on-chain mapping | Contract state |
-| `DynArray[T]` | Persistent on-chain array | Contract state |
+| `gl.nondet.web.render(url, mode="text")` | Fetch live URL — no oracle needed | `evaluate_submission()` |
+| `gl.nondet.exec_prompt(prompt)` | Call LLM inside consensus | `evaluate_submission()` |
+| `gl.vm.run_nondet_unsafe(leader_fn, validator_fn)` | Run Optimistic Democracy | `evaluate_submission()` |
+| `emit_transfer(address, amount)` | Send GEN tokens to any address | `evaluate_submission()` |
+| `TreeMap[K,V]` | Persistent on-chain mapping (use instead of dict) | Contract state |
+| `DynArray[T]` | Persistent on-chain array (use instead of list) | Contract state |
 
 ---
 
-## Critical rules (avoid common mistakes)
+## Critical rules — avoid these common mistakes
+
+### ❌ Mistake 1: LLM/web call outside inner function
 
 ```python
-# ❌ WRONG — LLM/web call directly in method body
+# WRONG — call directly in method body
 @gl.public.write
 def evaluate(self, job_id: int) -> None:
-    result = gl.nondet.exec_prompt("...")   # ERROR
+    result = gl.nondet.exec_prompt("...")        # ERROR
 
-# ✅ CORRECT — inside an inner function
+# CORRECT — must be inside an inner function
 @gl.public.write
 def evaluate(self, job_id: int) -> None:
     def leader_fn():
@@ -97,26 +98,42 @@ def evaluate(self, job_id: int) -> None:
     result = gl.vm.run_nondet_unsafe(leader_fn, validator_fn)
 ```
 
-```python
-# ❌ WRONG — accessing self inside nondet block
-def leader_fn():
-    content = gl.nondet.web.render(self.url)   # ERROR — self not available
+### ❌ Mistake 2: Accessing self inside nondet block
 
-# ✅ CORRECT — capture locals before the block
-url = job.submission_url   # capture before
+```python
+# WRONG — self is not accessible inside inner function
 def leader_fn():
-    content = gl.nondet.web.render(url)        # use local
+    content = gl.nondet.web.render(self.url)    # ERROR
+
+# CORRECT — capture locals before entering the block
+url = job.submission_url
+def leader_fn():
+    content = gl.nondet.web.render(url)         # use captured local
 ```
 
-```python
-# ❌ WRONG — mutating TreeMap entry in place
-job = self.jobs[job_id]
-job.verdict = "accepted"   # NOT persisted
+### ❌ Mistake 3: Not reassigning to TreeMap
 
-# ✅ CORRECT — reassign back to TreeMap
+```python
+# WRONG — mutation alone does NOT persist
 job = self.jobs[job_id]
 job.verdict = "accepted"
-self.jobs[job_id] = job   # ← required
+
+# CORRECT — must reassign back to TreeMap
+job = self.jobs[job_id]
+job.verdict = "accepted"
+self.jobs[job_id] = job     # ← this line is required
+```
+
+### ❌ Mistake 4: Using dict/list for persistent state
+
+```python
+# WRONG — dict is not persisted between transactions
+class MyContract(gl.Contract):
+    jobs: dict
+
+# CORRECT — use GenLayer storage types
+class MyContract(gl.Contract):
+    jobs: TreeMap[int, Job]
 ```
 
 ---
@@ -125,9 +142,9 @@ self.jobs[job_id] = job   # ← required
 
 - [GenLayer Docs](https://docs.genlayer.com)
 - [GenLayer Studio](https://studio.genlayer.com)
-- [Discord](https://discord.gg/8Jm4v89VAu)
-- [GitHub (GenLayer Labs)](https://github.com/genlayerlabs)
+- [GenLayer Discord](https://discord.gg/8Jm4v89VAu)
+- [GitHub — GenLayer Labs](https://github.com/genlayerlabs)
 
 ---
 
-*Built for the GenLayer Educational Content mission.*
+*Built for the GenLayer Educational Content mission — "From Zero to GenLayer: An Introductory Tutorial"*
