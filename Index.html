@@ -435,121 +435,286 @@ pre{font-family:var(--fm);font-size:13px;line-height:1.8;color:var(--text);white
   <p class="intro">From user wallets to Ethereum settlement — every layer of the system, explained. Each box represents a distinct responsibility with no overlap.</p>
 
   <div class="arch-wrap">
-    <svg width="100%" viewBox="0 0 760 640" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M1.5 1.5L8 5L1.5 8.5" fill="none" stroke="#ff5f1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-        <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M1.5 1.5L8 5L1.5 8.5" fill="none" stroke="#444460" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-        <marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M1.5 1.5L8 5L1.5 8.5" fill="none" stroke="#14b8a6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-        <marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-          <path d="M1.5 1.5L8 5L1.5 8.5" fill="none" stroke="#22c55e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </marker>
-      </defs>
+    <svg width="100%" viewBox="0 0 860 900" viewBox="0 0 860 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.8" fill="#ffffff07"/>
+    </pattern>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 2L8.5 5L1 8" fill="none" stroke="#ff6b35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 2L8.5 5L1 8" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="at" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 2L8.5 5L1 8" fill="none" stroke="#14b8a6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 2L8.5 5L1 8" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 2L8.5 5L1 8" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M1 2L8.5 5L1 8" fill="none" stroke="#9d5ff5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
 
-      <!-- LAYER 0: Users -->
-      <text x="380" y="22" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'" letter-spacing="3">LAYER 0 · USERS</text>
-      <rect x="40" y="32" width="200" height="60" rx="10" fill="rgba(13,148,136,.08)" stroke="rgba(13,148,136,.3)" stroke-width="1"/>
-      <text x="140" y="56" text-anchor="middle" fill="#14b8a6" font-family="'Syne'" font-weight="700" font-size="14">Client</text>
-      <text x="140" y="74" text-anchor="middle" fill="#50506a" font-size="11">Deposits GEN · post_job()</text>
+  <rect width="860" height="900" fill="#080810" rx="16"/>
+  <rect width="860" height="900" fill="url(#dots)" rx="16"/>
 
-      <rect x="520" y="32" width="200" height="60" rx="10" fill="rgba(124,58,237,.08)" stroke="rgba(124,58,237,.3)" stroke-width="1"/>
-      <text x="620" y="56" text-anchor="middle" fill="#9d5ff5" font-family="'Syne'" font-weight="700" font-size="14">Freelancer</text>
-      <text x="620" y="74" text-anchor="middle" fill="#50506a" font-size="11">Submits URL · submit_work()</text>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LAYER 0 — USERS                                        -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="430" y="36" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700"
+    letter-spacing="4" fill="#2a2a44">LAYER 0  ·  USERS</text>
 
-      <!-- Arrows to contract -->
-      <line x1="200" y1="62" x2="310" y2="138" stroke="#ff5f1f" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#a1)"/>
-      <line x1="520" y1="62" x2="446" y2="138" stroke="#9d5ff5" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#a2)"/>
-      <text x="230" y="108" fill="#ff5f1f" font-size="10" font-family="'JetBrains Mono'" transform="rotate(-28,230,108)">post_job(value)</text>
-      <text x="450" y="100" fill="#9d5ff5" font-size="10" font-family="'JetBrains Mono'" transform="rotate(28,450,100)">submit_work(url)</text>
+  <!-- Client -->
+  <rect x="52" y="46" width="220" height="74" rx="11"
+    fill="#0b1f1e" stroke="#14b8a6" stroke-width="1.4"/>
+  <text x="162" y="74" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="15" fill="#14b8a6">Client</text>
+  <text x="162" y="94" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="11.5" fill="#4a6070">Deposits GEN · creates job</text>
+  <text x="162" y="111" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10.5" fill="#1e3a38">post_job( value )</text>
 
-      <!-- LAYER 1: Contract -->
-      <text x="380" y="128" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'" letter-spacing="3">LAYER 1 · INTELLIGENT CONTRACT</text>
-      <rect x="280" y="136" width="200" height="68" rx="10" fill="rgba(255,95,31,.08)" stroke="rgba(255,95,31,.35)" stroke-width="1.2"/>
-      <text x="380" y="162" text-anchor="middle" fill="#e8e8f0" font-family="'Syne'" font-weight="700" font-size="15">FreelanceGuard.py</text>
-      <text x="380" y="180" text-anchor="middle" fill="#9090a8" font-size="11">gl.Contract · Python · GenVM</text>
-      <text x="380" y="196" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">escrow · state · routing logic</text>
+  <!-- Freelancer -->
+  <rect x="588" y="46" width="220" height="74" rx="11"
+    fill="#130f1f" stroke="#9d5ff5" stroke-width="1.4"/>
+  <text x="698" y="74" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="15" fill="#9d5ff5">Freelancer</text>
+  <text x="698" y="94" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="11.5" fill="#4a6070">Submits completed work</text>
+  <text x="698" y="111" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10.5" fill="#2a1a4a">submit_work( url )</text>
 
-      <!-- Arrow to evaluation trigger -->
-      <line x1="380" y1="204" x2="380" y2="238" stroke="#ff5f1f" stroke-width="1.2" marker-end="url(#a1)"/>
-      <text x="395" y="225" fill="#ff5f1f" font-size="10" font-family="'JetBrains Mono'">evaluate_submission()</text>
+  <!-- Client → Contract: go down, then right horizontally, then down into contract -->
+  <polyline points="162,120 162,160 300,160 300,188"
+    fill="none" stroke="#ff6b35" stroke-width="1.4" stroke-dasharray="5 4"
+    marker-end="url(#ao)"/>
+  <text x="234" y="154" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#ff6b35">post_job()</text>
 
-      <!-- LAYER 2: Web Fetch + AI eval -->
-      <text x="380" y="254" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'" letter-spacing="3">LAYER 2 · NONDETERMINISTIC EXECUTION</text>
+  <!-- Freelancer → Contract: go down, then left horizontally, then down into contract -->
+  <polyline points="698,120 698,160 560,160 560,188"
+    fill="none" stroke="#9d5ff5" stroke-width="1.4" stroke-dasharray="5 4"
+    marker-end="url(#ap)"/>
+  <text x="632" y="154" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#9d5ff5">submit_work()</text>
 
-      <rect x="60" y="262" width="230" height="64" rx="10" fill="rgba(251,191,36,.06)" stroke="rgba(251,191,36,.25)" stroke-width="1"/>
-      <text x="175" y="284" text-anchor="middle" fill="#fbbf24" font-family="'Syne'" font-weight="700" font-size="13">Live Web Fetch</text>
-      <text x="175" y="302" text-anchor="middle" fill="#9090a8" font-size="11">gl.nondet.web.get_webpage()</text>
-      <text x="175" y="318" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">no oracle · direct HTTP</text>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LAYER 1 — INTELLIGENT CONTRACT                         -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="430" y="183" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700"
+    letter-spacing="4" fill="#2a2a44">LAYER 1  ·  INTELLIGENT CONTRACT</text>
 
-      <rect x="470" y="262" width="230" height="64" rx="10" fill="rgba(255,95,31,.06)" stroke="rgba(255,95,31,.25)" stroke-width="1"/>
-      <text x="585" y="284" text-anchor="middle" fill="#ff7a40" font-family="'Syne'" font-weight="700" font-size="13">LLM Evaluation</text>
-      <text x="585" y="302" text-anchor="middle" fill="#9090a8" font-size="11">gl.nondet.exec_prompt(prompt)</text>
-      <text x="585" y="318" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">criteria + content → verdict</text>
+  <rect x="220" y="190" width="420" height="82" rx="12"
+    fill="#150d05" stroke="#ff6b35" stroke-width="1.8"/>
+  <!-- top accent bar -->
+  <rect x="220" y="190" width="420" height="3" rx="2" fill="#ff6b35" opacity="0.55"/>
+  <text x="430" y="221" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="17" fill="#eeeeee">FreelanceGuard.py</text>
+  <text x="430" y="242" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="12" fill="#60607a">gl.Contract  ·  Python  ·  GenVM</text>
+  <text x="430" y="260" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10.5" fill="#382010">escrow  ·  state  ·  routing logic</text>
 
-      <!-- Arrows from contract to layer 2 -->
-      <line x1="330" y1="204" x2="220" y2="262" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a2)"/>
-      <line x1="430" y1="204" x2="535" y2="262" stroke="#ff5f1f" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a2)"/>
+  <!-- Contract → nondet layer (straight down) -->
+  <line x1="430" y1="272" x2="430" y2="308"
+    stroke="#ff6b35" stroke-width="1.6" marker-end="url(#ao)"/>
+  <text x="455" y="294"
+    font-family="'Courier New',monospace" font-size="10" fill="#ff6b35">evaluate_submission()</text>
 
-      <!-- Side label: no oracle -->
-      <line x1="290" y1="294" x2="240" y2="294" stroke="#333348" stroke-width="1" stroke-dasharray="3 3"/>
-      <text x="5" y="294" fill="#333348" font-size="10" font-family="'JetBrains Mono'" dominant-baseline="central">← no oracle</text>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LAYER 2 — NONDETERMINISTIC EXECUTION                   -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="430" y="304" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700"
+    letter-spacing="4" fill="#2a2a44">LAYER 2  ·  NONDETERMINISTIC EXECUTION  ·  GenVM</text>
 
-      <!-- LAYER 3: Validators -->
-      <text x="380" y="356" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'" letter-spacing="3">LAYER 3 · VALIDATOR NODES</text>
+  <!-- WEB FETCH -->
+  <rect x="52" y="312" width="342" height="82" rx="11"
+    fill="#14100a" stroke="#fbbf24" stroke-width="1.3"/>
+  <text x="223" y="340" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="14" fill="#fbbf24">Live Web Fetch</text>
+  <text x="223" y="360" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="11" fill="#60607a">gl.nondet.web.render( url )</text>
+  <text x="223" y="380" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#3a300a">mode="text"  ·  no oracle  ·  direct HTTP</text>
 
-      <rect x="30" y="364" width="185" height="72" rx="10" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.25)" stroke-width="1"/>
-      <text x="122" y="384" text-anchor="middle" fill="#3b82f6" font-family="'Syne'" font-weight="700" font-size="12">Validator A</text>
-      <text x="122" y="400" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">LEADER · GPT-4o</text>
-      <text x="122" y="416" text-anchor="middle" fill="#444460" font-size="11">proposes verdict</text>
-      <text x="122" y="430" text-anchor="middle" fill="#333348" font-size="10">fetches URL independently</text>
+  <!-- LLM EVAL -->
+  <rect x="466" y="312" width="342" height="82" rx="11"
+    fill="#150d05" stroke="#ff8040" stroke-width="1.3"/>
+  <text x="637" y="340" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="14" fill="#ff8040">LLM Evaluation</text>
+  <text x="637" y="360" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="11" fill="#60607a">gl.nondet.exec_prompt( prompt )</text>
+  <text x="637" y="380" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#3a1a05">criteria + content  →  verdict JSON</text>
 
-      <rect x="287" y="364" width="185" height="72" rx="10" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.25)" stroke-width="1"/>
-      <text x="380" y="384" text-anchor="middle" fill="#3b82f6" font-family="'Syne'" font-weight="700" font-size="12">Validator B</text>
-      <text x="380" y="400" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">VOTER · Claude 3.5</text>
-      <text x="380" y="416" text-anchor="middle" fill="#444460" font-size="11">verifies leader's verdict</text>
-      <text x="380" y="430" text-anchor="middle" fill="#333348" font-size="10">equivalence check</text>
+  <!-- Contract splits: horizontal route to each box -->
+  <polyline points="380,272 164,272 164,312"
+    fill="none" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="4 3"
+    marker-end="url(#ay)"/>
+  <polyline points="480,272 637,272 637,312"
+    fill="none" stroke="#ff8040" stroke-width="1.2" stroke-dasharray="4 3"
+    marker-end="url(#ao)"/>
 
-      <rect x="544" y="364" width="185" height="72" rx="10" fill="rgba(37,99,235,.07)" stroke="rgba(37,99,235,.25)" stroke-width="1"/>
-      <text x="637" y="384" text-anchor="middle" fill="#3b82f6" font-family="'Syne'" font-weight="700" font-size="12">Validator C</text>
-      <text x="637" y="400" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">VOTER · LLaMA 3</text>
-      <text x="637" y="416" text-anchor="middle" fill="#444460" font-size="11">verifies leader's verdict</text>
-      <text x="637" y="430" text-anchor="middle" fill="#333348" font-size="10">equivalence check</text>
+  <!-- Web → LLM pipeline connector -->
+  <line x1="394" y1="353" x2="466" y2="353"
+    stroke="#333348" stroke-width="1" stroke-dasharray="3 3"
+    marker-end="url(#ao)"/>
+  <text x="430" y="347" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9" fill="#252540">content →</text>
 
-      <!-- Arrows from layer 2 to validators -->
-      <line x1="280" y1="326" x2="160" y2="364" stroke="#444460" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a2)"/>
-      <line x1="380" y1="326" x2="380" y2="364" stroke="#444460" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a2)"/>
-      <line x1="480" y1="326" x2="600" y2="364" stroke="#444460" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#a2)"/>
+  <!-- Layer 2 → Validators: straight vertical lines -->
+  <line x1="164" y1="394" x2="164" y2="430"
+    stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ab)"/>
+  <line x1="430" y1="394" x2="430" y2="430"
+    stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ab)"/>
+  <line x1="637" y1="394" x2="637" y2="430"
+    stroke="#3b82f6" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#ab)"/>
 
-      <!-- LAYER 4: Consensus -->
-      <text x="380" y="458" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'" letter-spacing="3">LAYER 4 · CONSENSUS</text>
-      <rect x="200" y="466" width="360" height="56" rx="10" fill="rgba(22,163,74,.07)" stroke="rgba(22,163,74,.28)" stroke-width="1.2"/>
-      <text x="380" y="488" text-anchor="middle" fill="#22c55e" font-family="'Syne'" font-weight="700" font-size="14">Optimistic Democracy</text>
-      <text x="380" y="507" text-anchor="middle" fill="#9090a8" font-size="11">supermajority vote → finalized verdict</text>
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LAYER 3 — VALIDATORS                                   -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="430" y="426" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700"
+    letter-spacing="4" fill="#2a2a44">LAYER 3  ·  VALIDATOR NODES</text>
 
-      <!-- Arrows from validators to consensus -->
-      <line x1="122" y1="436" x2="250" y2="466" stroke="#22c55e" stroke-width="1" marker-end="url(#a4)"/>
-      <line x1="380" y1="436" x2="380" y2="466" stroke="#22c55e" stroke-width="1" marker-end="url(#a4)"/>
-      <line x1="637" y1="436" x2="510" y2="466" stroke="#22c55e" stroke-width="1" marker-end="url(#a4)"/>
+  <!-- Validator A (left, under web fetch) -->
+  <rect x="52" y="434" width="224" height="98" rx="11"
+    fill="#08101e" stroke="#3b82f6" stroke-width="1.3"/>
+  <text x="164" y="460" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="13.5" fill="#3b82f6">Validator A</text>
+  <rect x="104" y="466" width="120" height="17" rx="6"
+    fill="rgba(59,130,246,0.12)" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="164" y="479" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9.5" fill="#3b82f6" font-weight="700">LEADER · GPT-4o</text>
+  <text x="164" y="502" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="11" fill="#506080">Proposes verdict</text>
+  <text x="164" y="520" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9.5" fill="#202040">fetches URL independently</text>
 
-      <!-- LAYER 5: Fund release -->
-      <line x1="330" y1="522" x2="190" y2="568" stroke="#14b8a6" stroke-width="1.2" marker-end="url(#a3)"/>
-      <line x1="430" y1="522" x2="570" y2="568" stroke="#14b8a6" stroke-width="1.2" marker-end="url(#a3)"/>
-      <text x="220" y="552" fill="#333348" font-size="10" font-family="'JetBrains Mono'">rejected</text>
-      <text x="520" y="552" fill="#333348" font-size="10" font-family="'JetBrains Mono'">accepted</text>
+  <!-- Validator B (center, under pipeline midpoint) -->
+  <rect x="318" y="434" width="224" height="98" rx="11"
+    fill="#08101e" stroke="#3b82f6" stroke-width="1.3"/>
+  <text x="430" y="460" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="13.5" fill="#3b82f6">Validator B</text>
+  <rect x="370" y="466" width="120" height="17" rx="6"
+    fill="rgba(59,130,246,0.08)" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="430" y="479" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9.5" fill="#3b82f6" font-weight="700">VOTER · Claude 3.5</text>
+  <text x="430" y="502" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="11" fill="#506080">Verifies leader verdict</text>
+  <text x="430" y="520" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9.5" fill="#202040">equivalence check</text>
 
-      <rect x="60" y="568" width="200" height="48" rx="10" fill="rgba(13,148,136,.08)" stroke="rgba(13,148,136,.28)" stroke-width="1"/>
-      <text x="160" y="588" text-anchor="middle" fill="#14b8a6" font-family="'Syne'" font-weight="700" font-size="13">Refund → Client</text>
-      <text x="160" y="606" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">gl.emit_transfer(client, budget)</text>
+  <!-- Validator C (right, under LLM eval) -->
+  <rect x="584" y="434" width="224" height="98" rx="11"
+    fill="#08101e" stroke="#3b82f6" stroke-width="1.3"/>
+  <text x="696" y="460" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="13.5" fill="#3b82f6">Validator C</text>
+  <rect x="636" y="466" width="120" height="17" rx="6"
+    fill="rgba(59,130,246,0.08)" stroke="#3b82f6" stroke-width="0.8"/>
+  <text x="696" y="479" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9.5" fill="#3b82f6" font-weight="700">VOTER · LLaMA 3</text>
+  <text x="696" y="502" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="11" fill="#506080">Verifies leader verdict</text>
+  <text x="696" y="520" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="9.5" fill="#202040">equivalence check</text>
 
-      <rect x="500" y="568" width="200" height="48" rx="10" fill="rgba(22,163,74,.08)" stroke="rgba(22,163,74,.28)" stroke-width="1"/>
-      <text x="600" y="588" text-anchor="middle" fill="#22c55e" font-family="'Syne'" font-weight="700" font-size="13">Pay → Freelancer</text>
-      <text x="600" y="606" text-anchor="middle" fill="#50506a" font-size="10" font-family="'JetBrains Mono'">gl.emit_transfer(freelancer, budget)</text>
-    </svg>
+  <!-- Validators → Consensus: angled into center box cleanly -->
+  <polyline points="164,532 164,570 346,570 346,580"
+    fill="none" stroke="#22c55e" stroke-width="1.3" marker-end="url(#ag)"/>
+  <line x1="430" y1="532" x2="430" y2="580"
+    stroke="#22c55e" stroke-width="1.3" marker-end="url(#ag)"/>
+  <polyline points="696,532 696,570 514,570 514,580"
+    fill="none" stroke="#22c55e" stroke-width="1.3" marker-end="url(#ag)"/>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LAYER 4 — CONSENSUS                                    -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <text x="430" y="576" text-anchor="middle"
+    font-family="'JetBrains Mono',monospace" font-size="10" font-weight="700"
+    letter-spacing="4" fill="#2a2a44">LAYER 4  ·  CONSENSUS</text>
+
+  <rect x="170" y="582" width="520" height="70" rx="12"
+    fill="#091508" stroke="#22c55e" stroke-width="1.7"/>
+  <rect x="170" y="582" width="520" height="3" rx="2" fill="#22c55e" opacity="0.45"/>
+  <text x="430" y="614" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="16" fill="#22c55e">Optimistic Democracy</text>
+  <text x="430" y="638" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="12" fill="#4a8a60">supermajority vote  →  finalized verdict</text>
+
+  <!-- Consensus forks to two outcomes -->
+  <!-- Left fork: rejected → refund -->
+  <polyline points="320,652 320,704 178,704 178,732"
+    fill="none" stroke="#14b8a6" stroke-width="1.4" marker-end="url(#at)"/>
+  <text x="253" y="697" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#14b8a6">rejected</text>
+
+  <!-- Right fork: accepted → pay -->
+  <polyline points="540,652 540,704 682,704 682,732"
+    fill="none" stroke="#22c55e" stroke-width="1.4" marker-end="url(#ag)"/>
+  <text x="608" y="697" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#22c55e">accepted</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LAYER 5 — FUND RELEASE                                 -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <!-- Refund box -->
+  <rect x="52" y="732" width="252" height="66" rx="11"
+    fill="#0b1f1e" stroke="#14b8a6" stroke-width="1.3"/>
+  <text x="178" y="759" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="14" fill="#14b8a6">Refund → Client</text>
+  <text x="178" y="782" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#1e3a38">emit_transfer( client, budget )</text>
+
+  <!-- Pay box -->
+  <rect x="556" y="732" width="252" height="66" rx="11"
+    fill="#091508" stroke="#22c55e" stroke-width="1.3"/>
+  <text x="682" y="759" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="14" fill="#22c55e">Pay → Freelancer</text>
+  <text x="682" y="782" text-anchor="middle"
+    font-family="'Courier New',monospace" font-size="10" fill="#1a3a1a">emit_transfer( freelancer, budget )</text>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- LEGEND                                                 -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <rect x="0" y="826" width="860" height="74" fill="#05050d"/>
+  <line x1="0" y1="826" x2="860" y2="826" stroke="#ffffff08" stroke-width="1"/>
+
+  <!-- row 1 -->
+  <circle cx="48" cy="850" r="5" fill="#14b8a6"/>
+  <text x="59" y="854" font-family="'Courier New',monospace" font-size="10.5" fill="#40506a">Client / Freelancer</text>
+
+  <circle cx="200" cy="850" r="5" fill="#ff6b35"/>
+  <text x="211" y="854" font-family="'Courier New',monospace" font-size="10.5" fill="#40506a">Intelligent Contract</text>
+
+  <circle cx="362" cy="850" r="5" fill="#fbbf24"/>
+  <text x="373" y="854" font-family="'Courier New',monospace" font-size="10.5" fill="#40506a">Web Fetch</text>
+
+  <circle cx="460" cy="850" r="5" fill="#ff8040"/>
+  <text x="471" y="854" font-family="'Courier New',monospace" font-size="10.5" fill="#40506a">LLM Eval</text>
+
+  <circle cx="558" cy="850" r="5" fill="#3b82f6"/>
+  <text x="569" y="854" font-family="'Courier New',monospace" font-size="10.5" fill="#40506a">Validators</text>
+
+  <circle cx="648" cy="850" r="5" fill="#22c55e"/>
+  <text x="659" y="854" font-family="'Courier New',monospace" font-size="10.5" fill="#40506a">Consensus + Release</text>
+
+  <!-- row 2 -->
+  <line x1="48" y1="874" x2="76" y2="874" stroke="#333348" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="84" y="878" font-family="'Courier New',monospace" font-size="10" fill="#252540">dashed = nondeterministic  (each validator runs independently)</text>
+  <line x1="560" y1="874" x2="588" y2="874" stroke="#ff6b35" stroke-width="1.5"/>
+  <text x="596" y="878" font-family="'Courier New',monospace" font-size="10" fill="#252540">solid = deterministic</text>
+</svg>
+
 
     <div class="arch-legend">
       <div class="leg-item"><div class="leg-dot" style="background:#14b8a6"></div> Client / Freelancer wallets</div>
