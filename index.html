@@ -311,7 +311,7 @@ pre{font-family:var(--fm);font-size:13px;line-height:1.8;color:var(--text);white
       <div class="cc-badge o">Web access</div>
       <h3>Live internet access — no oracle</h3>
       <p>Traditional smart contracts are blind to the outside world. GenLayer contracts fetch any public URL directly at runtime. No Chainlink feed, no relay contract, no trust assumption on a data provider.</p>
-      <div class="mono">gl.nondet.web.get_webpage(url)</div>
+      <div class="mono">gl.nondet.web.render(url, mode="text")</div>
     </div>
     <div class="cc">
       <div class="cc-badge p">AI reasoning</div>
@@ -349,7 +349,7 @@ pre{font-family:var(--fm);font-size:13px;line-height:1.8;color:var(--text);white
     <table class="cmp">
       <thead><tr><th>Capability</th><th>Traditional Smart Contract</th><th>GenLayer Intelligent Contract</th></tr></thead>
       <tbody>
-        <tr><td class="td-feat">Read live websites</td><td class="td-bad">Requires oracle (Chainlink, etc.)</td><td class="td-good">Native — <span class="td-code">gl.nondet.web.get_webpage()</span></td></tr>
+        <tr><td class="td-feat">Read live websites</td><td class="td-bad">Requires oracle (Chainlink, etc.)</td><td class="td-good">Native — <span class="td-code">gl.nondet.web.render()</span></td></tr>
         <tr><td class="td-feat">Call a language model</td><td class="td-bad">Not possible on-chain</td><td class="td-good">Native — <span class="td-code">gl.nondet.exec_prompt()</span></td></tr>
         <tr><td class="td-feat">Natural language logic</td><td class="td-bad">Structured inputs only</td><td class="td-good">Plain-English criteria</td></tr>
         <tr><td class="td-feat">Subjective judgment</td><td class="td-bad">Impossible by design</td><td class="td-good">AI validators reach consensus</td></tr>
@@ -395,12 +395,12 @@ pre{font-family:var(--fm);font-size:13px;line-height:1.8;color:var(--text);white
       <div class="tl-dot t">03</div>
       <div class="tl-body">
         <h3>Contract fetches the submission URL live</h3>
-        <p>Anyone can call <code style="font-family:var(--fm);font-size:13px;color:var(--accent)">evaluate_submission()</code> to trigger the AI evaluation. The contract calls <code style="font-family:var(--fm);font-size:13px;color:var(--accent)">gl.nondet.web.get_webpage(url, mode="text")</code> to fetch the actual live content of the submitted URL. Each validator fetches independently — there is no shared fetch, no relay, no oracle.</p>
+        <p>Anyone can call <code style="font-family:var(--fm);font-size:13px;color:var(--accent)">evaluate_submission()</code> to trigger the AI evaluation. The contract calls <code style="font-family:var(--fm);font-size:13px;color:var(--accent)">gl.nondet.web.render(url, mode="text")</code> to fetch the actual live content of the submitted URL. Each validator fetches independently — there is no shared fetch, no relay, no oracle.</p>
         <div class="infobox teal" style="margin-top:16px">
           <div class="infobox-icon">🌐</div>
           <p><strong>No oracle needed.</strong> Traditional blockchains need an oracle to bring external data on-chain. GenLayer contracts access the web natively — the fetch happens inside consensus, not outside it.</p>
         </div>
-        <span class="tl-tag t">gl.nondet.web.get_webpage(url)</span>
+        <span class="tl-tag t">gl.nondet.web.render(url, mode="text")</span>
       </div>
     </div>
     <div class="tl-item">
@@ -894,12 +894,12 @@ pre{font-family:var(--fm);font-size:13px;line-height:1.8;color:var(--text);white
         <span class="kw">assert</span> job.verdict == <span class="str">"pending"</span>, <span class="str">"Already resolved"</span>
 
         <span class="cm"># ── STEP 1: Fetch the live submission ──────────────────────────────────
-        # gl.nondet.web.get_webpage() fetches any public URL at runtime.
+        # gl.nondet.web.render() fetches any public URL at runtime.
         # "nondet" = non-deterministic (different validators may get slightly
         # different content, but the verdict comparison handles this).
         # Each validator fetches independently — no shared oracle, no relay.</span>
         <span class="kw">try</span>:
-            content = gl.nondet.web.<span class="fn">get_webpage</span>(job.submission_url, mode=<span class="str">"text"</span>)
+            content = gl.nondet.web.<span class="fn">render</span>(job.submission_url, mode=<span class="str">"text"</span>)
             content = content[:<span class="nu">3000</span>]  <span class="cm"># trim to avoid LLM token limit</span>
         <span class="kw">except</span>:
             content = <span class="str">f"[Could not fetch: {job.submission_url}]"</span>
@@ -1105,7 +1105,7 @@ Respond ONLY as JSON: {{"agree": true}} or {{"agree": false}}
       <div class="gi-def">A Python class extending <span class="mono">gl.Contract</span>. Unlike traditional smart contracts, it can access the web, call LLMs, and reason about unstructured data — all inside the on-chain consensus process. Every method you define becomes a callable on-chain function.</div>
     </div>
     <div class="gi">
-      <div class="gi-term"><div class="gi-badge" style="background:var(--yellow2)"></div>gl.nondet.web.get_webpage()</div>
+      <div class="gi-term"><div class="gi-badge" style="background:var(--yellow2)"></div>gl.nondet.web.render()</div>
       <div class="gi-def">Fetches any public URL at the time the transaction executes. Returns the page content as text or HTML. Each validator fetches independently. This replaces the need for oracle contracts entirely — web access is native to GenLayer. The "nondet" prefix means the result may vary slightly between validators, which is handled by the Equivalence Principle.</div>
     </div>
     <div class="gi">
@@ -1277,9 +1277,9 @@ const QS = [
   {
     cat:"Web Access",
     q:"How does FreelanceGuard access the freelancer's submitted work URL without an oracle?",
-    opts:["It uses Chainlink to fetch the URL","The client pastes the content manually into the contract","gl.nondet.web.get_webpage() fetches the URL natively inside GenVM","The contract sends an email to a server that returns the content"],
+    opts:["It uses Chainlink to fetch the URL","The client pastes the content manually into the contract","gl.nondet.web.render() fetches the URL natively inside GenVM","The contract sends an email to a server that returns the content"],
     ans:2,
-    exp:"gl.nondet.web.get_webpage(url, mode='text') is a native GenLayer capability. It fetches any public URL at runtime. Each validator fetches independently — no oracle contract, no external relay, no trust assumption on a data provider."
+    exp:"gl.nondet.web.render(url, mode='text') is a native GenLayer capability. It fetches any public URL at runtime. Each validator fetches independently — no oracle contract, no external relay, no trust assumption on a data provider."
   },
   {
     cat:"Web Access",
